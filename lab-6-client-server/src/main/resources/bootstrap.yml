@@ -1,0 +1,48 @@
+spring:
+  application:
+    name: istclient
+  cloud:
+    config:
+      enabled: true
+      discovery:
+        enabled: true
+        serviceId: SENTENCE-CONFIG
+
+server:
+  port: 8070
+
+#si vemos arriba he definido el datasource y springboot automaticamente lo usa en el dao  al igual como lo hacia
+# si lo configuramos en el properties
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8011/eureka/
+
+
+istclient:
+  ribbon:
+    DeploymentContextBasedVipAddresses: istclient
+    listOfServers: localhost:8070    
+    MaxAutoRetries: 2
+
+hystrix:
+  command:
+    istclientCommand:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 16000
+      circuitBreaker:
+        sleepWindowInMilliseconds: 2000 #con esto mantengo el circuito abierto por 2 segundos hasta volver a aceptar peticiones
+        requestVolumeThreshold: 3  #umbral de volumen de solicitud
+
+
+
+---
+spring:  
+  datasource:
+    url: jdbc:oracle:thin:@//10.113.46.79:1541/wcsbdi
+    username: TER_WRITE
+    password: TER_WRITE_pwd0
+    driver-class-name: oracle.jdbc.OracleDriver
+           

@@ -1,0 +1,1 @@
+UPDATE TER_WRITE.TB_CLIENTES SET MSISDN = :msisdn, MSISDN_OLD = :msisdn_old WHERE MSISDN = :msisdn_old

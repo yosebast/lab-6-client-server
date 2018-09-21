@@ -1,0 +1,31 @@
+---
+logging:
+  pattern:
+    console: "%clr(%d{yyyy-MM-dd HH:mm:ss}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr([${springAppName:-},%X{X-B3-TraceId:-},%X{X-B3-SpanId:-},%X{X-Span-Export:-}]){yellow} %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  file: C:/Entorno/App/lab6_logs/client.log
+  level:
+    org.springframework.web: ERROR
+    org.springframework.transaction: ERROR
+    org.test: DEBUG
+    org.hibernate: ERROR
+
+
+#esto es un ejemplo por que se va a tener que definir los mensajes de error en el fichero yml
+message:
+  ERROR_MSISDN: El parámetro yml msisdn es obligatorio
+
+
+---
+# messages errors
+error:
+  ERROR_MSISDN: 115, El parámetro msisdn es obligatorio
+  ERROR_FORMATO_MSISDN: 116, Formato de MSISDN no valido
+  ERROR_FORMATO_FECHAS: 103, El formato de la fecha introducida no es correcto (dd.MM.YY HH:mm:ss)
+  MSISDN_NO_EXISTE: 600, El MSISDN informado no existe para el Customer_ID informado en la BBDD
+  ERROR_BBDD: 401, Error al conectar con la base de datos
+
+# filename sql
+filename:
+  FILENAME_UPDATE_MSISDN_BY_MSISDN_OLD: upDateMsisdnByMsisdn_old
+  FILENAME_GET_MSISDN: getMsisdn
