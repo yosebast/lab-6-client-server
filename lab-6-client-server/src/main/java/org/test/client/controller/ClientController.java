@@ -2,7 +2,6 @@ package org.test.client.controller;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,10 +21,7 @@ import org.test.client.utils.ValidatorUtils;
 public class ClientController {
 	
 	@Autowired
-	ClientService clientService;
-	
-	@Value("${message.ERROR_MSISDN}")
-	String mensaje;
+	ClientService clientService;	
 
 	@RequestMapping(value="/orange/istclient", method=RequestMethod.POST)
 	public IsterDTO getDateAltaProductByClient(@RequestBody IsterDTO isterDTO) {
@@ -52,19 +48,18 @@ public class ClientController {
 	}	*/
 	
 	@GetMapping("actualiza_msisdn/{MSISDN_Nuevo}/{MSISDN_Viejo}")
-	public IsterDTO upDate_msisdn(@PathVariable("MSISDN_Nuevo") String msisdn, @PathVariable("MSISDN_Viejo") String msisdn_old) {
-		IsterDTO obj_isterDto = null;
-		String mensage = mensaje;
+	public IsterDTO upDateMsisdn(@PathVariable("MSISDN_Nuevo") String msisdn, @PathVariable("MSISDN_Viejo") String msisdnOld) {
+		IsterDTO objIsterDto;	
 		try {
 			ValidatorUtils.validaIfMsisdnIsCorrect(StringConstants.MSISDN, msisdn, true);
-			ValidatorUtils.validaIfMsisdnIsCorrect(StringConstants.MSISDN, msisdn_old, true);
+			ValidatorUtils.validaIfMsisdnIsCorrect(StringConstants.MSISDN, msisdnOld, true);
 			// buscamos si existe el msisdn_old informado
-			clientService.validaExisteMsisdn(msisdn_old);
-			obj_isterDto = clientService.upDateMsisdnByMsisdn_old(msisdn, msisdn_old);
+			clientService.existMsisdn(msisdnOld);
+			objIsterDto = clientService.upDateMsisdnByMsisdnOld(msisdn, msisdnOld);
 		} catch (ClientException | ValidationException e) {
-			obj_isterDto = createdMessageError(e.getMessage());
+			objIsterDto = createdMessageError(e.getMessage());
 		}
-		return obj_isterDto;
+		return objIsterDto;
 	}
 
 	private IsterDTO createdMessageError(String messageException) {

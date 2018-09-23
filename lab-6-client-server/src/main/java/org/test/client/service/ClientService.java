@@ -6,7 +6,7 @@ import org.test.client.model.IsterDTO;
 
 public interface ClientService {
 	IsterDTO existMsisdn(IsterDTO isterDTO);
-	void validaExisteMsisdn(String msisdn) throws ClientException;
-	IsterDTO upDateMsisdnByMsisdn_old(String msisdn, String msisdn_old) throws ClientException;
+	void existMsisdn(String msisdn) throws ClientException;
+	IsterDTO upDateMsisdnByMsisdnOld(String msisdn, String msisdnOld) throws ClientException;
 
 }

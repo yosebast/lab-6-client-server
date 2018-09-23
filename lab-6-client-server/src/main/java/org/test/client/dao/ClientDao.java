@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface ClientDao {
 	List<String> getListMsisdn(String msisdn) throws SQLException, IOException;
-	int upDateMsisdnByMsisdn_old(String msisdn, String msisdn_old) throws SQLException, IOException;
+	int upDateMsisdnByMsisdnOld(String msisdn, String msisdnOld) throws SQLException, IOException;
 }

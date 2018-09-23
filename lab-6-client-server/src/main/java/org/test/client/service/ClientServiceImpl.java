@@ -48,7 +48,7 @@ public class ClientServiceImpl implements ClientService {
 	}
 
 	@Override
-	public void validaExisteMsisdn(String msisdn) throws ClientException {
+	public void existMsisdn(String msisdn) throws ClientException {
 		
 		try {
 			List<String> listMsisdn = clientDao.getListMsisdn(msisdn);
@@ -68,11 +68,11 @@ public class ClientServiceImpl implements ClientService {
 	}
 
 	@Override	
-	public IsterDTO upDateMsisdnByMsisdn_old(String msisdn, String msisdn_old) throws ClientException {		
+	public IsterDTO upDateMsisdnByMsisdnOld(String msisdn, String msisdnOld) throws ClientException {		
 		final IsterDTO isterDto = toIsterDTO();
 		int rowsUpdated;
 		try {
-			rowsUpdated = clientDao.upDateMsisdnByMsisdn_old(msisdn, msisdn_old);
+			rowsUpdated = clientDao.upDateMsisdnByMsisdnOld(msisdn, msisdnOld);
 			String update_message = rowsUpdated > 0 ? StringConstants.UPDATE_OK : StringConstants.UPDATE_KO;
 			isterDto.setMessage(update_message);			
 		} catch (SQLException e) {

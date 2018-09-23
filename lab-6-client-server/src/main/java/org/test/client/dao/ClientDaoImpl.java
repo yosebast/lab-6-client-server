@@ -21,10 +21,7 @@ import org.test.client.jdbc.SqlUtils;
 @Repository
 public class ClientDaoImpl implements ClientDao {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(ClientDaoImpl.class);
-	
-	//private static final String FILENAME_UPDATE_MSISDN_BY_MSISDN_OLD = "getAllConsultaMovimientos";
-	//private static final String FILENAME_GET_MSISDN = "getMsisdn";
+	private static final Logger LOGGER = LoggerFactory.getLogger(ClientDaoImpl.class);	
 	
 	@Autowired
 	DataSource dataSource;
@@ -66,7 +63,7 @@ public class ClientDaoImpl implements ClientDao {
 	}
 		
 	@Override
-	public int upDateMsisdnByMsisdn_old(String msisdn, String msisdn_old) throws SQLException, IOException {
+	public int upDateMsisdnByMsisdnOld(String msisdn, String msisdnOld) throws SQLException, IOException {
 		Connection conn = dataSource.getConnection();
 		conn.setAutoCommit(false);
 		NamedParameterStatement namedParameterStatement = null;
@@ -77,7 +74,7 @@ public class ClientDaoImpl implements ClientDao {
 			
 			namedParameterStatement = new NamedParameterStatement(conn, sQuery);			
 			namedParameterStatement.setString("msisdn", msisdn);
-			namedParameterStatement.setString("msisdn_old", msisdn_old);
+			namedParameterStatement.setString("msisdn_old", msisdnOld);
 			int result =  namedParameterStatement.executeUpdate();			
 			/*if(result > 0) {
 				throw new SQLException("este es el error que envio a posta" + result);//esto es para probar la transaccion
